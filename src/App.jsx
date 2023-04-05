@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CareerTest from "./components/CareerTest/CareerTest";
+import Header from "./components/Header/Header";
 
 function App() {
   return (
     <div className="App">
-      <h1>Career Guide</h1>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<CareerTest />} />
+          <Route path="/career-quiz" element={<CareerTest />} />
         </Routes>
       </BrowserRouter>
     </div>
