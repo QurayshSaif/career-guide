@@ -1,0 +1,71 @@
+.quiz {
+  background-color: white;
+  &__question {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  &__input {
+    margin-right: 0.5rem;
+  }
+
+  &__text {
+    font-size: 1.2rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  &__button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &--previous {
+      background-color: #f44336;
+    }
+
+    &--next {
+      background-color: #4caf50;
+    }
+
+    &--submit {
+      background-color: #008cba;
+    }
+  }
+
+  &__result {
+    margin-top: 1rem;
+  }
+
+  &__result-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  &__result-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__result-item {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+}
