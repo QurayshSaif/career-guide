@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./app.scss";
 import CareerTest from "./components/CareerTest/CareerTest";
 import Header from "./components/Header/Header";
 

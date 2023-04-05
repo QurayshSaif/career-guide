@@ -7,7 +7,7 @@ a {
   margin: auto 0;
 }
 .header {
-  background: rgb(202, 200, 86);
+  // background: rgb(202, 200, 86);
 
   &__contents {
     display: flex;
@@ -36,13 +36,11 @@ a {
 
   &__nav {
     display: inline-flex;
-    width: 100%;
-
+    gap: 10rem;
+    margin-bottom: 1rem;
     @include tablet {
       width: auto;
-    }
-
-    @include desktop {
+      gap: 1rem;
     }
   }
 

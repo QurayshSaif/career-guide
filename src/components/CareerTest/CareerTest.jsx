@@ -72,7 +72,7 @@ export default function CareerTest() {
   return (
     <div className="quiz">
       {quiz.length > 0 ? (
-        <>
+        <div className="quiz__container">
           <p className="quiz__question">{currentQuestion.question}</p>
           {currentQuestion.answers.map((answer) => (
             <label className="quiz__label" key={answer.value}>
@@ -127,7 +127,7 @@ export default function CareerTest() {
               </ul>
             </div>
           )}
-        </>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
