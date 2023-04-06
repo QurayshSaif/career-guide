@@ -3,6 +3,7 @@ import "./app.scss";
 import CareerTest from "./components/CareerTest/CareerTest";
 import Header from "./components/Header/Header";
 import QuizOptions from "./components/QuizOptions/QuizOptions";
+import DemoCareerTest from "./components/CareerTest/DemoCareerTest";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<QuizOptions />} />
           <Route path="/career-quiz" element={<CareerTest />} />
+          <Route path="/demo-career-quiz" element={<DemoCareerTest />} />
         </Routes>
       </BrowserRouter>
     </div>

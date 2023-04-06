@@ -5,7 +5,9 @@ import logo from "../../assets/career-guide-logo.png";
 const Header = () => {
   const location = useLocation();
   const isQuiz =
-    location.pathname.startsWith("/career-quiz") || location.pathname === "/";
+    location.pathname.startsWith("/career-quiz") ||
+    location.pathname === "/" ||
+    location.pathname === "/demo-career-quiz";
   const isCareerDetails = location.pathname.startsWith("/career-details");
 
   return (
