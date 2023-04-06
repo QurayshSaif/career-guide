@@ -6,15 +6,15 @@
   font-family: "Anek Malayalam", sans-serif;
   background-color: white;
   color: #11052c;
-  margin: 0 2rem;
+  margin: 3rem 2rem;
   padding: 0.5rem 0;
 
   @include tablet {
-    margin: 0 8rem;
+    margin: 3rem 8rem;
   }
 
   @include desktop {
-    margin: 0 19rem;
+    margin: 3rem 19rem;
   }
 
   &__container {

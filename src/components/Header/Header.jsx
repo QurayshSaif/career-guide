@@ -16,7 +16,7 @@ const Header = () => {
         </Link>
         <div className="header__nav">
           <Link
-            to="/career-quiz"
+            to="/"
             className={isQuiz ? " header__active" : "header__inactive"}
           >
             Career Quiz

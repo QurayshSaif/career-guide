@@ -1,0 +1,48 @@
+@use "../../styles/partials/mixins" as *;
+
+.quiz-length {
+  background-color: white;
+  margin: 3rem 2rem;
+  padding: 2.5rem 0;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @include tablet {
+    margin: 3rem 8rem;
+  }
+
+  @include desktop {
+    margin: 3rem 13rem;
+  }
+
+  &__title {
+    font-weight: 500;
+  }
+
+  &__option {
+    color: black;
+    margin: 1rem 1rem;
+    width: 50%;
+    --x: 50%;
+    --y: 50%;
+    position: relative;
+    appearance: none;
+    padding: 1em 2em;
+    cursor: pointer;
+    outline: none;
+    border-radius: 100px;
+
+    border: 2.5px solid transparent;
+    background: linear-gradient(#f4f1f1, #c69e9e) padding-box,
+      radial-gradient(farthest-corner at var(--x) var(--y), #00c9a7, #845ec2)
+        border-box;
+  }
+
+  &__text {
+    display: flex;
+    justify-content: center;
+  }
+}
