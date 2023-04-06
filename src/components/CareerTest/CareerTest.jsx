@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./CareerTest.scss";
 import axios from "axios";
 import { API_URL } from "../../utils/api";
+import { PieChart } from "react-minimal-pie-chart";
 
 export default function CareerTest() {
   const [quiz, setQuiz] = useState([]);
@@ -64,8 +65,22 @@ export default function CareerTest() {
     const sortedFields = Object.entries(scores)
       .sort(([, scoreA], [, scoreB]) => scoreB - scoreA)
       .map(([field]) => field);
-    return sortedFields.slice(0, 3);
+    return sortedFields.slice(0, 5);
   };
+
+  const data = getTopFields()
+    .slice(0, 5)
+    .map((field) => {
+      const percentage =
+        (scores[field] / Object.values(scores).reduce((a, b) => a + b, 0)) *
+        100;
+      return {
+        title: field,
+        value: scores[field],
+        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+        label: `${field} (${percentage.toFixed(2)}%)`,
+      };
+    });
 
   const currentQuestion = quiz[currentQuestionIndex];
 
@@ -125,6 +140,15 @@ export default function CareerTest() {
                   </li>
                 ))}
               </ul>
+              <PieChart
+                data={data}
+                label={({ dataEntry }) => dataEntry.label}
+                labelStyle={{
+                  fontSize: "2px",
+                  fontFamily: "sans-serif",
+                  fill: "#fff",
+                }}
+              />
             </div>
           )}
         </div>
