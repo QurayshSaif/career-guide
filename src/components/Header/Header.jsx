@@ -8,7 +8,7 @@ const Header = () => {
     location.pathname.startsWith("/career-quiz") ||
     location.pathname === "/" ||
     location.pathname === "/demo-career-quiz";
-  const isCareerDetails = location.pathname.startsWith("/career-details");
+  const isCareerDetails = location.pathname.startsWith("/job-search");
 
   return (
     <div className="header">
@@ -24,10 +24,10 @@ const Header = () => {
             Career Quiz
           </Link>
           <Link
-            to="/career-details"
+            to="/job-search"
             className={isCareerDetails ? " header__active" : "header__inactive"}
           >
-            Career Details
+            Job Search
           </Link>
         </div>
       </div>

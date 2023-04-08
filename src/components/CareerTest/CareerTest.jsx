@@ -3,6 +3,7 @@ import "./CareerTest.scss";
 import axios from "axios";
 import { API_URL } from "../../utils/api";
 import { PieChart } from "react-minimal-pie-chart";
+// import { Link } from "react-router-dom";
 
 export default function CareerTest() {
   const [quiz, setQuiz] = useState([]);

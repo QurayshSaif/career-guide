@@ -3,6 +3,7 @@ import "./CareerTest.scss";
 import axios from "axios";
 import { API_URL } from "../../utils/api";
 import { PieChart } from "react-minimal-pie-chart";
+import { Link } from "react-router-dom";
 
 export default function DemoCareerTest() {
   const [quiz, setQuiz] = useState([]);
@@ -164,6 +165,9 @@ export default function DemoCareerTest() {
                   fill: "#fff",
                 }}
               />
+              <Link to="/job-search" state={{ values: getTopFields() }}>
+                Job Search
+              </Link>
             </div>
           )}
         </div>
