@@ -9,6 +9,7 @@ export default function JobSearch() {
   let { state } = useLocation();
   const [jobSearch, setJobSearch] = useState("developer");
   const [city, setCity] = useState("toronto");
+  const [jobDetails, setJobDetails] = useState({});
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,8 +32,16 @@ export default function JobSearch() {
     fetchData();
   }, []);
 
+  const handleJobDetails = (job) => {
+    if (job.jobkey === jobDetails.jobkey) {
+      setJobDetails({});
+    } else {
+      setJobDetails(job);
+    }
+  };
+
   return (
-    <div>
+    <div className="job-search">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -48,7 +57,24 @@ export default function JobSearch() {
       </form>
 
       {searchData?.results?.map((item) => (
-        <div key={item.jobkey}>{item.jobtitle}</div>
+        <div key={item.jobkey} onClick={() => handleJobDetails(item)}>
+          <h1>{item.jobtitle}</h1>
+          <div
+            className={
+              "job-search__details" +
+              (item.jobkey === jobDetails.jobkey
+                ? ""
+                : " job-search__details--hide")
+            }
+          >
+            <p>Company Name: {item.company}</p>
+            <p>
+              Located in: {item.formattedLocationFull}, {item.country}
+            </p>
+            <p>Brief description: {item.snippet}</p>
+            <a href={item.url}>Apply</a>
+          </div>
+        </div>
       ))}
     </div>
   );
