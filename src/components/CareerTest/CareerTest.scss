@@ -1,6 +1,5 @@
 @use "../../styles/partials/mixins.scss" as *;
 @import url("https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@100;200;300;400;500;600;700;800&display=swap");
-// @use "../../styles/partials/variables.scss" as *;
 
 .quiz {
   font-family: "Anek Malayalam", sans-serif;
@@ -9,6 +8,7 @@
   margin: 3rem 2rem;
   padding: 0.5rem 0;
   border-radius: 3rem;
+  // height: 22rem;
 
   @include tablet {
     margin: 3rem 8rem;
@@ -19,7 +19,11 @@
   }
 
   &__container {
-    padding: 0rem 3.5rem;
+    padding: 0rem 1.5rem;
+
+    @include tablet {
+      padding: 0rem 3.5rem;
+    }
   }
 
   &__question {
@@ -42,13 +46,14 @@
 
   &__buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 3rem;
     margin-top: 1rem;
     margin-bottom: 2rem;
   }
 
   &__button {
     background-color: #4caf50;
+    border-radius: 10px;
     border: none;
     color: white;
     padding: 0.5rem 1rem;
@@ -73,6 +78,10 @@
 
   &__result {
     margin-top: 1rem;
+
+    &-container {
+      display: flex;
+    }
   }
 
   &__result-text {
@@ -102,7 +111,7 @@
   }
 
   &__pie-chart {
-    max-width: 32rem;
+    max-width: 30rem;
     margin: 1rem auto;
     display: block;
   }

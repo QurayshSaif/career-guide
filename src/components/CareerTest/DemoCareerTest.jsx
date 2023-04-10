@@ -29,7 +29,6 @@ export default function DemoCareerTest() {
       .get(`${API_URL}/scoring`)
       .then((response) => {
         setScoringSystem(response.data);
-        console.log(response.data);
       })
       .catch((error) => console.log(error));
   }, []);

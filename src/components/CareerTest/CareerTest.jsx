@@ -17,7 +17,6 @@ export default function CareerTest() {
       .get(`${API_URL}/scoring`)
       .then((response) => {
         setScoringSystem(response.data);
-        console.log(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -27,7 +26,6 @@ export default function CareerTest() {
       .get(`${API_URL}/questions`)
       .then((response) => {
         setQuiz(response.data);
-        console.log(response.data);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -102,19 +100,22 @@ export default function CareerTest() {
           {Object.keys(scores).length === 0 && (
             <div>
               <p className="quiz__question">{currentQuestion.question}</p>
-              {currentQuestion.answers.map((answer) => (
-                <label className="quiz__label" key={answer.value}>
-                  <input
-                    className="quiz__input"
-                    type="radio"
-                    name={`question-${currentQuestionIndex}`}
-                    value={answer.value}
-                    onChange={() => handleAnswerSelect(answer.value)}
-                    checked={answers[currentQuestionIndex] === answer.value}
-                  />
-                  <span className="quiz__text">{answer.text}</span>
-                </label>
-              ))}
+              <div className="quiz__option-container">
+                {currentQuestion.answers.map((answer) => (
+                  <label className="quiz__label" key={answer.value}>
+                    <input
+                      className="quiz__input"
+                      type="radio"
+                      name={`question-${currentQuestionIndex}`}
+                      value={answer.value}
+                      onChange={() => handleAnswerSelect(answer.value)}
+                      checked={answers[currentQuestionIndex] === answer.value}
+                    />
+                    <span className="quiz__text">{answer.text}</span>
+                  </label>
+                ))}
+              </div>
+
               <div className="quiz__buttons">
                 {currentQuestionIndex > 0 && (
                   <div
@@ -148,30 +149,31 @@ export default function CareerTest() {
               <p className="quiz__result-text">
                 Top fields based on your answers:
               </p>
-              <ol className="quiz__result-list">
-                {getTopFields().map((field) => (
-                  <li className="quiz__result-item" key={field}>
-                    {field}
-                  </li>
-                ))}
-              </ol>
-              <div className="quiz__job-search">
-                <Link to="/job-search" state={{ values: getTopFields() }}>
-                  Job Search
-                </Link>
+              <div className="quiz__result-container">
+                <ol className="quiz__result-list">
+                  {getTopFields().map((field) => (
+                    <li className="quiz__result-item" key={field}>
+                      {field}
+                    </li>
+                  ))}
+                </ol>
+
+                <PieChart
+                  className="quiz__pie-chart"
+                  data={data}
+                  label={({ dataEntry }) => dataEntry.label}
+                  labelStyle={{
+                    fontSize: "2px",
+                    fontFamily: "sans-serif",
+                    fill: "#000",
+                    fontWeight: "bold",
+                    fontSize: "0.15rem",
+                  }}
+                />
               </div>
-              <PieChart
-                className="quiz__pie-chart"
-                data={data}
-                label={({ dataEntry }) => dataEntry.label}
-                labelStyle={{
-                  fontSize: "2px",
-                  fontFamily: "sans-serif",
-                  fill: "#000",
-                  fontWeight: "bold",
-                  fontSize: "0.15rem",
-                }}
-              />
+              <Link to="/job-search" state={{ values: getTopFields() }}>
+                <div className="quiz__job-search">Job Search</div>
+              </Link>
             </div>
           )}
         </div>
