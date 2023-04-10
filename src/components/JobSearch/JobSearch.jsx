@@ -7,7 +7,8 @@ import { API_URL } from "../../utils/api";
 export default function JobSearch() {
   const [searchData, setSearchData] = useState([]);
   let { state } = useLocation();
-  const [jobSearch, setJobSearch] = useState("developer");
+  state = state || {};
+  const [jobSearch, setJobSearch] = useState("full time developer");
   const [city, setCity] = useState("toronto");
   const [jobDetails, setJobDetails] = useState({});
 
@@ -22,7 +23,6 @@ export default function JobSearch() {
         `${API_URL}/jobs?job=${jobSearch}&location=${city}&country=canada`
       );
       setSearchData(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -40,25 +40,50 @@ export default function JobSearch() {
     }
   };
 
+  const options = state?.values?.map((value, index) => (
+    <option key={index} value={value}>
+      {value}
+    </option>
+  ));
+
   return (
     <div className="job-search">
-      <form onSubmit={handleSubmit}>
+      <form className="job-search__form" onSubmit={handleSubmit}>
+        {state?.values ? (
+          <select
+            name="fields"
+            id="fields"
+            onChange={(e) => setJobSearch(e.target.value)}
+          >
+            <option value="">Choose a top Field</option>
+            {options}
+          </select>
+        ) : null}
+
         <input
+          className="job-search__input"
           type="text"
-          placeholder="Search jobs"
+          placeholder="Search job titles, company name"
           onChange={(e) => setJobSearch(e.target.value)}
         />
         <input
+          className="job-search__input"
           type="text"
           placeholder="city name"
           onChange={(e) => setCity(e.target.value)}
         />
-        <button type="submit">Submit</button>
+        <button className="job-search__submit" type="submit">
+          Find Jobs
+        </button>
       </form>
 
       {searchData?.results?.map((item) => (
-        <div key={item.jobkey} onClick={() => handleJobDetails(item)}>
-          <h1>{item.jobtitle}</h1>
+        <div
+          className="job-search__results"
+          key={item.jobkey}
+          onClick={() => handleJobDetails(item)}
+        >
+          <h1 className="job-search__title">{item.jobtitle}</h1>
           <div
             className={
               "job-search__details" +
@@ -67,12 +92,17 @@ export default function JobSearch() {
                 : " job-search__details--hide")
             }
           >
-            <p>Company Name: {item.company}</p>
-            <p>
-              Located in: {item.formattedLocationFull}, {item.country}
-            </p>
-            <p>Brief description: {item.snippet}</p>
-            <a href={item.url}>Apply</a>
+            <p className="job-search__text-title">Company Name: </p>
+            <span className="job-search__text">{item.company}</span>
+            <p className="job-search__text-title">Located in: </p>
+            <span className="job-search__text">
+              {item.formattedLocationFull}, {item.country}
+            </span>
+            <p className="job-search__text-title">Brief description: </p>
+            <span className="job-search__text">{item.snippet}</span>
+            <div className="job-search__apply">
+              <a href={item.url}>Apply</a>
+            </div>
           </div>
         </div>
       ))}

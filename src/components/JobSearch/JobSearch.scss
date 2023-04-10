@@ -1,3 +1,24 @@
-.job-search__details--hide {
-  display: none;
+@use "../../styles/partials/mixins.scss" as *;
+
+.job-search {
+  background-color: white;
+  margin: 3rem 1rem;
+  padding: 2rem;
+  border-radius: 5%;
+
+  @include tablet {
+    margin: 3rem 5rem;
+    padding: 3rem 4rem;
+  }
+
+  @include desktop {
+    margin: 3rem 10rem;
+  }
+
+  &__details--hide {
+    display: none;
+  }
+}
+a {
+  color: black;
 }

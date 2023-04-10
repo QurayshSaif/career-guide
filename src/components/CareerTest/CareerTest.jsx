@@ -3,7 +3,7 @@ import "./CareerTest.scss";
 import axios from "axios";
 import { API_URL } from "../../utils/api";
 import { PieChart } from "react-minimal-pie-chart";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function CareerTest() {
   const [quiz, setQuiz] = useState([]);
@@ -69,16 +69,26 @@ export default function CareerTest() {
     return sortedFields.slice(0, 5);
   };
 
+  const getRandomColor = () => {
+    const min = 50; // minimum value for each color channel
+    const max = 205; // maximum value for each color channel
+    const r = Math.floor(Math.random() * (max - min + 1)) + min;
+    const g = Math.floor(Math.random() * (max - min + 1)) + min;
+    const b = Math.floor(Math.random() * (max - min + 1)) + min;
+    return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`;
+  };
+
   const data = getTopFields()
     .slice(0, 5)
     .map((field) => {
       const percentage =
         (scores[field] / Object.values(scores).reduce((a, b) => a + b, 0)) *
         100;
+
       return {
         title: field,
         value: scores[field],
-        color: `#${Math.floor(Math.random() * 16777215).toString(16)}`,
+        color: getRandomColor(),
         label: `${field} (${percentage.toFixed(2)}%)`,
       };
     });
@@ -147,14 +157,19 @@ export default function CareerTest() {
                 labelStyle={{
                   fontSize: "2px",
                   fontFamily: "sans-serif",
-                  fill: "#fff",
+                  fill: "#000",
+                  fontWeight: "bold",
                 }}
               />
+
+              <Link to="/job-search" state={{ values: getTopFields() }}>
+                Job Search
+              </Link>
             </div>
           )}
         </div>
       ) : (
-        <p>Loading...</p>
+        <h2>Loading...</h2>
       )}
     </div>
   );
