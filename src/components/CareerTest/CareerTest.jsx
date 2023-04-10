@@ -99,46 +99,50 @@ export default function CareerTest() {
     <div className="quiz">
       {quiz.length > 0 ? (
         <div className="quiz__container">
-          <p className="quiz__question">{currentQuestion.question}</p>
-          {currentQuestion.answers.map((answer) => (
-            <label className="quiz__label" key={answer.value}>
-              <input
-                className="quiz__input"
-                type="radio"
-                name={`question-${currentQuestionIndex}`}
-                value={answer.value}
-                onChange={() => handleAnswerSelect(answer.value)}
-                checked={answers[currentQuestionIndex] === answer.value}
-              />
-              <span className="quiz__text">{answer.text}</span>
-            </label>
-          ))}
-          <div className="quiz__buttons">
-            {currentQuestionIndex > 0 && (
-              <div
-                className="quiz__button quiz__button--previous"
-                onClick={handlePreviousQuestion}
-              >
-                Previous Question
+          {Object.keys(scores).length === 0 && (
+            <div>
+              <p className="quiz__question">{currentQuestion.question}</p>
+              {currentQuestion.answers.map((answer) => (
+                <label className="quiz__label" key={answer.value}>
+                  <input
+                    className="quiz__input"
+                    type="radio"
+                    name={`question-${currentQuestionIndex}`}
+                    value={answer.value}
+                    onChange={() => handleAnswerSelect(answer.value)}
+                    checked={answers[currentQuestionIndex] === answer.value}
+                  />
+                  <span className="quiz__text">{answer.text}</span>
+                </label>
+              ))}
+              <div className="quiz__buttons">
+                {currentQuestionIndex > 0 && (
+                  <div
+                    className="quiz__button quiz__button--previous"
+                    onClick={handlePreviousQuestion}
+                  >
+                    Previous Question
+                  </div>
+                )}
+                {currentQuestionIndex < quiz.length - 1 && (
+                  <div
+                    className="quiz__button quiz__button--next"
+                    onClick={handleNextQuestion}
+                  >
+                    Next Question
+                  </div>
+                )}
+                {currentQuestionIndex === quiz.length - 1 && (
+                  <div
+                    className="quiz__button quiz__button--submit"
+                    onClick={calculateScores}
+                  >
+                    Submit
+                  </div>
+                )}
               </div>
-            )}
-            {currentQuestionIndex < quiz.length - 1 && (
-              <div
-                className="quiz__button quiz__button--next"
-                onClick={handleNextQuestion}
-              >
-                Next Question
-              </div>
-            )}
-            {currentQuestionIndex === quiz.length - 1 && (
-              <div
-                className="quiz__button quiz__button--submit"
-                onClick={calculateScores}
-              >
-                Submit
-              </div>
-            )}
-          </div>
+            </div>
+          )}
           {Object.keys(scores).length > 0 && (
             <div className="quiz__result">
               <p className="quiz__result-text">

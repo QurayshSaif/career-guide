@@ -4,7 +4,7 @@
   background-color: white;
   margin: 3rem 1rem;
   padding: 2rem;
-  border-radius: 5%;
+  border-radius: 3rem;
 
   @include tablet {
     margin: 3rem 5rem;
@@ -15,10 +15,87 @@
     margin: 3rem 10rem;
   }
 
+  &__input {
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    border: 1px solid rgb(212, 193, 193);
+    &::placeholder {
+      text-align: center;
+    }
+  }
+
+  &__submit {
+    background-color: #564caf;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  &__results {
+    border: 1px solid black;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+  }
+
+  &__title-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__dropdown {
+    height: 12px;
+    margin: auto 0;
+  }
+
+  &__title {
+    margin: 0.5rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+
+  &__block {
+    margin: 0.5rem 0;
+  }
+
+  &__text-title {
+    font-weight: 500;
+    display: block;
+
+    @include tablet {
+      display: inline;
+    }
+  }
+
   &__details--hide {
     display: none;
   }
-}
-a {
-  color: black;
+
+  &__apply {
+    background-color: #564caf;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 0.3rem 1rem;
+    margin: 0.5rem 0;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+  }
 }

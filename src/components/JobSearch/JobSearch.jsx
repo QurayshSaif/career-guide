@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router";
 import { API_URL } from "../../utils/api";
+import dropdown from "../../assets/dropdown.png";
 
 export default function JobSearch() {
   const [searchData, setSearchData] = useState([]);
@@ -53,6 +54,7 @@ export default function JobSearch() {
           <select
             name="fields"
             id="fields"
+            className="job-search__input"
             onChange={(e) => setJobSearch(e.target.value)}
           >
             <option value="">Choose a top Field</option>
@@ -63,13 +65,13 @@ export default function JobSearch() {
         <input
           className="job-search__input"
           type="text"
-          placeholder="Search job titles, company name"
+          placeholder="Search Job titles or Company"
           onChange={(e) => setJobSearch(e.target.value)}
         />
         <input
           className="job-search__input"
           type="text"
-          placeholder="city name"
+          placeholder="Enter City Name"
           onChange={(e) => setCity(e.target.value)}
         />
         <button className="job-search__submit" type="submit">
@@ -83,7 +85,14 @@ export default function JobSearch() {
           key={item.jobkey}
           onClick={() => handleJobDetails(item)}
         >
-          <h1 className="job-search__title">{item.jobtitle}</h1>
+          <div className="job-search__title-container">
+            <h1 className="job-search__title">{item.jobtitle}</h1>
+            <img
+              className="job-search__dropdown"
+              src={dropdown}
+              alt="Dropdown arrow"
+            />
+          </div>
           <div
             className={
               "job-search__details" +
@@ -92,16 +101,24 @@ export default function JobSearch() {
                 : " job-search__details--hide")
             }
           >
-            <p className="job-search__text-title">Company Name: </p>
-            <span className="job-search__text">{item.company}</span>
-            <p className="job-search__text-title">Located in: </p>
-            <span className="job-search__text">
-              {item.formattedLocationFull}, {item.country}
-            </span>
-            <p className="job-search__text-title">Brief description: </p>
-            <span className="job-search__text">{item.snippet}</span>
+            <div className="job-search__block">
+              <span className="job-search__text-title">Company Name: </span>
+              <span className="job-search__text">{item.company}</span>
+            </div>
+            <div className="job-search__block">
+              <span className="job-search__text-title">Located in: </span>
+              <span className="job-search__text">
+                {item.formattedLocationFull}, {item.country}
+              </span>
+            </div>
+            <div className="job-search__block">
+              <span className="job-search__text-title">
+                Brief description:{" "}
+              </span>
+              <span className="job-search__text">{item.snippet}</span>
+            </div>
             <div className="job-search__apply">
-              <a href={item.url}>Apply</a>
+              <a href={item.url}>Apply on Indeed</a>
             </div>
           </div>
         </div>
