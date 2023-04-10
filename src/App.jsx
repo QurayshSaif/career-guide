@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<QuizOptions />} />
           <Route path="/career-quiz" element={<CareerTest />} />
-          <Route path="/demo-career-quiz" element={<DemoCareerTest />} />
+          <Route path="/quick-career-quiz" element={<DemoCareerTest />} />
           <Route path="/job-search" element={<JobSearch />} />
         </Routes>
       </BrowserRouter>

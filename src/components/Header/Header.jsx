@@ -7,7 +7,7 @@ const Header = () => {
   const isQuiz =
     location.pathname.startsWith("/career-quiz") ||
     location.pathname === "/" ||
-    location.pathname === "/demo-career-quiz";
+    location.pathname === "/quick-career-quiz";
   const isCareerDetails = location.pathname.startsWith("/job-search");
 
   return (

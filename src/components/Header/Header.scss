@@ -7,8 +7,6 @@ a {
   margin: auto 0;
 }
 .header {
-  // background: rgb(202, 200, 86);
-
   &__contents {
     display: flex;
     flex-direction: column;
@@ -35,18 +33,20 @@ a {
   }
 
   &__nav {
-    display: inline-flex;
+    display: flex;
     gap: 10rem;
     margin-bottom: 1rem;
+    font-size: 1.1rem;
     @include tablet {
       width: auto;
-      gap: 1rem;
+      gap: 2.5rem;
     }
   }
 
   &__active {
     text-decoration: underline;
     color: $black;
+    font-weight: bold;
     &:hover {
       text-decoration: underline;
     }
@@ -54,13 +54,9 @@ a {
 
   &__inactive {
     background: none;
-    color: grey;
+    color: $black;
     text-decoration: none;
     text-transform: capitalize;
-
-    @include tablet {
-      padding: 1rem;
-    }
 
     &:hover {
       color: $white;

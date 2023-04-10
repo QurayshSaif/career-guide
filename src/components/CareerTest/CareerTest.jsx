@@ -148,14 +148,20 @@ export default function CareerTest() {
               <p className="quiz__result-text">
                 Top fields based on your answers:
               </p>
-              <ul className="quiz__result-list">
+              <ol className="quiz__result-list">
                 {getTopFields().map((field) => (
                   <li className="quiz__result-item" key={field}>
                     {field}
                   </li>
                 ))}
-              </ul>
+              </ol>
+              <div className="quiz__job-search">
+                <Link to="/job-search" state={{ values: getTopFields() }}>
+                  Job Search
+                </Link>
+              </div>
               <PieChart
+                className="quiz__pie-chart"
                 data={data}
                 label={({ dataEntry }) => dataEntry.label}
                 labelStyle={{
@@ -163,12 +169,9 @@ export default function CareerTest() {
                   fontFamily: "sans-serif",
                   fill: "#000",
                   fontWeight: "bold",
+                  fontSize: "0.15rem",
                 }}
               />
-
-              <Link to="/job-search" state={{ values: getTopFields() }}>
-                Job Search
-              </Link>
             </div>
           )}
         </div>
