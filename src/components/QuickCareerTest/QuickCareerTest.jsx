@@ -83,8 +83,8 @@ export default function QuickCareerTest() {
   };
 
   const getRandomColor = () => {
-    const min = 50; // minimum value for each color channel
-    const max = 205; // maximum value for each color channel
+    const min = 50;
+    const max = 205;
     const r = Math.floor(Math.random() * (max - min + 1)) + min;
     const g = Math.floor(Math.random() * (max - min + 1)) + min;
     const b = Math.floor(Math.random() * (max - min + 1)) + min;

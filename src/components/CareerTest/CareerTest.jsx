@@ -12,6 +12,8 @@ export default function CareerTest() {
   const [answers, setAnswers] = useState([]);
   const [scores, setScores] = useState({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [showMessage, setShowMessage] = useState(false);
+  const [disableNextButton, setDisableNextButton] = useState(true);
 
   useEffect(() => {
     axios
@@ -34,10 +36,18 @@ export default function CareerTest() {
     const updatedAnswers = [...answers];
     updatedAnswers[currentQuestionIndex] = answerValue;
     setAnswers(updatedAnswers);
+    setDisableNextButton(false);
   };
-  console.log(quiz.length);
+
   const handleNextQuestion = () => {
+    if (answers[currentQuestionIndex] === undefined) {
+      setShowMessage(true);
+      setDisableNextButton(true);
+      return;
+    }
     setCurrentQuestionIndex(currentQuestionIndex + 1);
+    setDisableNextButton(answers[currentQuestionIndex + 1] === undefined);
+    setShowMessage(false);
   };
 
   const handlePreviousQuestion = () => {
@@ -45,6 +55,11 @@ export default function CareerTest() {
   };
 
   const calculateScores = () => {
+    if (answers[currentQuestionIndex] === undefined) {
+      setShowMessage(true);
+      setDisableNextButton(true);
+      return;
+    }
     const updatedScores = {};
 
     answers.forEach((answer) => {
@@ -58,7 +73,6 @@ export default function CareerTest() {
     });
 
     setScores(updatedScores);
-    console.log(updatedScores);
   };
 
   const getTopFields = () => {
@@ -134,18 +148,28 @@ export default function CareerTest() {
                   <div className="quiz__buttons">
                     {currentQuestionIndex < quiz.length - 1 && (
                       <div
-                        className="quiz__button quiz__button--next"
+                        className={`quiz__button quiz__button--next ${
+                          disableNextButton && "quiz__button--disabled"
+                        }`}
                         onClick={handleNextQuestion}
                       >
                         Next Question
                       </div>
                     )}
+
                     {currentQuestionIndex === quiz.length - 1 && (
                       <div
-                        className="quiz__button quiz__button--submit"
+                        className={`quiz__button quiz__button--submit ${
+                          disableNextButton && "quiz__button--disabled"
+                        }`}
                         onClick={calculateScores}
                       >
                         Submit
+                      </div>
+                    )}
+                    {showMessage && (
+                      <div className="quiz__message">
+                        Please select an option before proceeding!
                       </div>
                     )}
                   </div>
