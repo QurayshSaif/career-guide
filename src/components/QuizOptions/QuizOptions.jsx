@@ -12,7 +12,7 @@ export default function QuizOptions() {
             <div className="quiz-length__text">Quick Quiz (5 Questions)</div>
           </Link>
           <Link className="quiz-length__option" to="/career-quiz">
-            <div class="quiz-length__animate"></div>
+            <div className="quiz-length__animate"></div>
             <div className="quiz-length__text">
               Detailed Quiz (25 Questions)
             </div>
