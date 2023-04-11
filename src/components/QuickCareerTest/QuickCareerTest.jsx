@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_URL } from "../../utils/api";
 import { PieChart } from "react-minimal-pie-chart";
 import { Link } from "react-router-dom";
+import backarrow from "../../assets/arrow-back.svg";
 
 export default function QuickCareerTest() {
   const [quiz, setQuiz] = useState([]);
@@ -94,92 +95,104 @@ export default function QuickCareerTest() {
   const currentQuestion = quiz[currentQuestionIndex];
 
   return (
-    <div className="quiz">
-      {quiz.length > 0 ? (
+    <div className="quiz-parent">
+      <div className="quiz">
         <div className="quiz__container">
-          {Object.keys(scores).length === 0 && (
-            <div>
-              <p className="quiz__question">{currentQuestion.question}</p>
-              <div className="quiz__option-container">
-                {currentQuestion.answers.map((answer) => (
-                  <label className="quiz__label" key={answer.value}>
-                    <input
-                      className="quiz__input"
-                      type="radio"
-                      name={`question-${currentQuestionIndex}`}
-                      value={answer.value}
-                      onChange={() => handleAnswerSelect(answer.value)}
-                      checked={answers[currentQuestionIndex] === answer.value}
+          {quiz.length > 0 ? (
+            <>
+              {Object.keys(scores).length === 0 && (
+                <div>
+                  <div className="quiz__question-container">
+                    {currentQuestionIndex > 0 && (
+                      <img
+                        src={backarrow}
+                        onClick={handlePreviousQuestion}
+                        alt="Back Arrow"
+                        className="quiz__arrow"
+                      />
+                    )}
+                    <p className="quiz__question">{currentQuestion.question}</p>
+                  </div>
+                  <div className="quiz__option-container">
+                    {currentQuestion.answers.map((answer) => (
+                      <label className="quiz__label" key={answer.value}>
+                        <input
+                          className="quiz__input"
+                          type="radio"
+                          name={`question-${currentQuestionIndex}`}
+                          value={answer.value}
+                          onChange={() => handleAnswerSelect(answer.value)}
+                          checked={
+                            answers[currentQuestionIndex] === answer.value
+                          }
+                        />
+                        <span className="quiz__text">{answer.text}</span>
+                      </label>
+                    ))}
+                  </div>
+
+                  <div className="quiz__buttons">
+                    {currentQuestionIndex < quiz.length - 1 && (
+                      <div
+                        className="quiz__button quiz__button--next"
+                        onClick={handleNextQuestion}
+                      >
+                        Next Question
+                      </div>
+                    )}
+                    {currentQuestionIndex === quiz.length - 1 && (
+                      <div
+                        className="quiz__button quiz__button--submit"
+                        onClick={calculateScores}
+                      >
+                        Submit
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+              {Object.keys(scores).length > 0 && (
+                <div className="quiz__result">
+                  <p className="quiz__result-text">
+                    Top Fields Based On Your Answers:
+                  </p>
+                  <div className="quiz__result-container">
+                    <ol className="quiz__result-list">
+                      {getTopFields().map((field) => (
+                        <li className="quiz__result-item" key={field}>
+                          {field}
+                        </li>
+                      ))}
+                    </ol>
+
+                    <PieChart
+                      className="quiz__pie-chart"
+                      data={data}
+                      label={({ dataEntry }) => dataEntry.label}
+                      labelStyle={{
+                        fill: "#fff",
+                        fontSize: "0.16rem",
+                      }}
                     />
-                    <span className="quiz__text">{answer.text}</span>
-                  </label>
-                ))}
-              </div>
-
-              <div className="quiz__buttons">
-                {currentQuestionIndex > 0 && (
-                  <div
-                    className="quiz__button quiz__button--previous"
-                    onClick={handlePreviousQuestion}
-                  >
-                    Previous Question
                   </div>
-                )}
-                {currentQuestionIndex < quiz.length - 1 && (
-                  <div
-                    className="quiz__button quiz__button--next"
-                    onClick={handleNextQuestion}
-                  >
-                    Next Question
+                  <div className="quiz__job-search-container">
+                    <Link to="/">
+                      <div className="quiz__job-search quiz__job-search--retake">
+                        Retake Quiz
+                      </div>
+                    </Link>
+                    <Link to="/job-search" state={{ values: getTopFields() }}>
+                      <div className="quiz__job-search">Job Search</div>
+                    </Link>
                   </div>
-                )}
-                {currentQuestionIndex === quiz.length - 1 && (
-                  <div
-                    className="quiz__button quiz__button--submit"
-                    onClick={calculateScores}
-                  >
-                    Submit
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-          {Object.keys(scores).length > 0 && (
-            <div className="quiz__result">
-              <p className="quiz__result-text">
-                Top fields based on your answers:
-              </p>
-              <div className="quiz__result-container">
-                <ol className="quiz__result-list">
-                  {getTopFields().map((field) => (
-                    <li className="quiz__result-item" key={field}>
-                      {field}
-                    </li>
-                  ))}
-                </ol>
-
-                <PieChart
-                  className="quiz__pie-chart"
-                  data={data}
-                  label={({ dataEntry }) => dataEntry.label}
-                  labelStyle={{
-                    fontSize: "2px",
-                    fontFamily: "sans-serif",
-                    fill: "#000",
-                    fontWeight: "bold",
-                    fontSize: "0.15rem",
-                  }}
-                />
-              </div>
-              <Link to="/job-search" state={{ values: getTopFields() }}>
-                <div className="quiz__job-search">Job Search</div>
-              </Link>
-            </div>
+                </div>
+              )}
+            </>
+          ) : (
+            <h2>Loading...</h2>
           )}
         </div>
-      ) : (
-        <h2>Loading...</h2>
-      )}
+      </div>
     </div>
   );
 }
