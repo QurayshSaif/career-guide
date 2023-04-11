@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import "./CareerTest.scss";
+import "../CareerTest/CareerTest.scss";
 import axios from "axios";
 import { API_URL } from "../../utils/api";
 import { PieChart } from "react-minimal-pie-chart";
 import { Link } from "react-router-dom";
 
-export default function CareerTest() {
+export default function QuickCareerTest() {
   const [quiz, setQuiz] = useState([]);
   const [scoringSystem, setScoringSystem] = useState({});
   const [answers, setAnswers] = useState([]);
@@ -23,7 +23,7 @@ export default function CareerTest() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/questions`)
+      .get(`${API_URL}/questions/quick`)
       .then((response) => {
         setQuiz(response.data);
       })
@@ -34,6 +34,7 @@ export default function CareerTest() {
     updatedAnswers[currentQuestionIndex] = answerValue;
     setAnswers(updatedAnswers);
   };
+  console.log(quiz.length);
   const handleNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex + 1);
   };
@@ -56,6 +57,7 @@ export default function CareerTest() {
     });
 
     setScores(updatedScores);
+    console.log(updatedScores);
   };
 
   const getTopFields = () => {

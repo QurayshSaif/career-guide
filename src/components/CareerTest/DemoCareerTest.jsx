@@ -72,7 +72,6 @@ export default function DemoCareerTest() {
     });
 
     setScores(updatedScores);
-    console.log(updatedScores);
   };
 
   const getTopFields = () => {
