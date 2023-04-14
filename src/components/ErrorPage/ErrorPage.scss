@@ -1,0 +1,23 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__image {
+    width: 25%;
+  }
+
+  &__link {
+    text-decoration: none;
+    background-color: #564caf;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}

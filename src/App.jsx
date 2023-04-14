@@ -5,6 +5,7 @@ import Header from "./components/Header/Header";
 import QuizOptions from "./components/QuizOptions/QuizOptions";
 import JobSearch from "./components/JobSearch/JobSearch";
 import QuickCareerTest from "./components/QuickCareerTest/QuickCareerTest";
+import ErrorPage from "./components/ErrorPage/ErrorPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/career-quiz" element={<CareerTest />} />
           <Route path="/quick-career-quiz" element={<QuickCareerTest />} />
           <Route path="/job-search" element={<JobSearch />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
     </div>
