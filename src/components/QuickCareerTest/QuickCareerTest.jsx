@@ -107,6 +107,7 @@ export default function QuickCareerTest() {
     });
 
   const currentQuestion = quiz[currentQuestionIndex];
+  console.log(currentQuestionIndex);
 
   return (
     <div className="quiz-parent">
@@ -126,6 +127,9 @@ export default function QuickCareerTest() {
                       />
                     )}
                     <p className="quiz__question">{currentQuestion.question}</p>
+                    <div className="quiz__qn-number">
+                      ( {currentQuestionIndex + 1} / {quiz.length} )
+                    </div>
                   </div>
                   <div className="quiz__option-container">
                     {currentQuestion.answers.map((answer) => (

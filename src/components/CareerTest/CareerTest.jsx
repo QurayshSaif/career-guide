@@ -126,6 +126,9 @@ export default function CareerTest() {
                       />
                     )}
                     <p className="quiz__question">{currentQuestion.question}</p>
+                    <div className="quiz__qn-number">
+                      ( {currentQuestionIndex + 1} / {quiz.length} )
+                    </div>
                   </div>
                   <div className="quiz__option-container">
                     {currentQuestion.answers.map((answer) => (
